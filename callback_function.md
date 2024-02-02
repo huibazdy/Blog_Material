@@ -93,3 +93,8 @@ Node* search_list(Node* node,void const *value,int (*compare)(void const *,void 
 }
 ```
 
+
+
+## 参考资料
+
+1. [回调函数](https://zhuanlan.zhihu.com/p/627181746)
