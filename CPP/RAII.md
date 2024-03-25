@@ -2,7 +2,7 @@
 
 > RAII
 
-**RAII** 的全称是**资源获取即初始化**（**Resource Acquisition Is Initialization，RAII**）。**Bjarne** 称它为使用局部对象来管理资源的技术。
+**RAII** 的全称是**资源获取即初始化**（**Resource Acquisition Is Initialization，RAII**）。**Bjarne** 称它为使用局部对象来管理资源的技术。因为局部对象存储在栈中，所以其生命周期由操作系统管理，无需人为介入。它的提出是防止程序员忘记销毁资源而导致的资源浪费或内存泄漏等问题。
 
 
 
@@ -15,7 +15,7 @@
 
 
 
-> RAII 实现文件句柄
+> RAII 实现文件句柄封装
 
 ```c++
 #include<iostream>
