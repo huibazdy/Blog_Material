@@ -128,3 +128,20 @@ void use_func1(T arg) {
 3. 没有类似 make_shared 的标准库函数返回一个 up，只能通过绑定 new 返回的指针；
 4. 初始化 up 必须使用直接初始化形式。
 
+
+
+```c++
+unique_ptr<double> up1;
+unique_ptr<int> up2(new int(42));
+```
+
+
+
+unique_ptr 不支持拷贝或赋值操作：
+
+```c++
+unique_ptr<string> up1(new string("hello"));
+unique_ptr<string> up2(up1);                      //错误，up 不支持拷贝
+unique_ptr<string> up3;
+up3 = up1;                                        //错误，up 不支持赋值
+```
