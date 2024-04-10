@@ -71,9 +71,66 @@ auto f1 = [](const std::string &a, const std::string &b) {return a.size() < b.si
 ```c++
 void f1()
 {
-    int v = 30;
-    auto f = [v] {return v;};
-    v = 0;
+    int v1 = 30;
+    auto f = [v1] {return v1;};
+    v1 = 0;
     auto j = f(); // j 为 30，因为 f 在被创建时保存了 v 的拷贝
 }
 ```
+
+因为被捕获变量的值是在 lambda 被创建时拷贝，所以随后对齐修改不会改变 lambda 内对应的值。
+
+
+
+> 引用捕获
+
+```c++
+void f2()
+{
+    int v2 = 50;
+    auto f = [&v2] {return v2;};
+    v2 = 0;
+    auto j = f(); // j 为 0，因为 f 在被创建时保存的是 v 的引用，而不是拷贝
+}
+```
+
+* 以引用方式捕获变量时，必须保证 lambda 执行时变量是存在的
+
+
+
+> 可变 lambda
+
+如果希望在 lambda 中能改变被捕获变量的值，需要在参数列表后加上关键字：`mutable`。
+
+```c++
+void f3()
+{
+    int v3 = 80;
+    auto f = [v3] () mutable {return ++v3;};
+    v3 = 0;
+    auto j = f(); // j 为 81
+}
+```
+
+
+
+> 指定 lambda 返回类型
+
+除了单一返回类型，以及编译器默认返回 void 类型外，有时候还需要对 lambda 表达式指定返回类型：
+
+```c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+    ...
+	transform(vec1.begin(), vec1.end(), vec1.begin(),
+             [](int i) {return i < 0 ? -i : i;});
+	...
+}
+```
+
+函数 transform 接受三个迭代器和一个可调用对象。参数 1 和 2 表示输入序列，参数 3 表示目的（输出）位置。在这个例子中，输入与输出目的位置的迭代器是相同的，含义是该算法将输入序列的每个元素替换为可调用对象操作该元素得到的结果。
+算法对输入序列中每个元素调用可调用对象，并将结果写到目的位置。可调用对象这里采用的是 lambda 表达式，其含义是将序列中每个负数变为它的绝对值。
