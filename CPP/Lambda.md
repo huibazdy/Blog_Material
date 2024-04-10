@@ -55,3 +55,25 @@ std::cout << f() << std::endl;  // 调用 lambda 表达式 f
 ```c++
 auto f1 = [](const std::string &a, const std::string &b) {return a.size() < b.size();};
 ```
+
+
+
+> 定义 lambda 时，编译器生成了一个对应的 lambda 类类型
+
+* 当向一个函数传递一个 lambda 表达式时，同时定义了这个类以及一个类对象
+
+
+
+> 值捕获
+
+被捕获变量的值是在 lambda 被创建时拷贝，而不是调用时拷贝，前提是变量可以拷贝。
+
+```c++
+void f1()
+{
+    int v = 30;
+    auto f = [v] {return v;};
+    v = 0;
+    auto j = f(); // j 为 30，因为 f 在被创建时保存了 v 的拷贝
+}
+```
