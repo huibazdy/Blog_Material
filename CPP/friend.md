@@ -29,14 +29,35 @@
       Screen() = default;      // 默认构造函数，因为有自定义构造函数，所以此函数是必需的
       Screen(pos h, pos w, char c):height(h),width(w),contents(h*w,c) {} // 自定义构造函数
       
-      char get() const {return contents[cursor];}  // 读取光标处字符，隐式内联
+      char get() const {return contents[cursor];}  //读取光标处字符，定义在类内自动内联（隐式内联）
       
       inline char get(pos h,pos w) const; // 显式内联
       
-      Screen &move(pos r, pos c);  // 能在之后设为内联
+      Screen &move(pos row, pos column);  // 能在之后设为内联
   private:
       pos cursor = 0;  // 光标位置
       pos height = 0;  // 窗高
       pos width = 0;   // 窗宽
       std::string contents;  // 显示的字符串内容
   };
+
+移动光标（外部声明为inline）：
+
+```c++
+inline Screen &Screen::move(pos row, pos column)
+{
+    pos r = row * width;    //计算行的位置
+    cursor = r + column;    //在行内将光标移动到指定的列
+    return *this;           //以左值形式返回对象
+}
+```
+
+读取光标处字符（类内显式声明为 inline）：
+
+```c++
+char Screen::get(pos row, pos column) const
+{
+    pos r = row * width;     //计算行位置
+    return contents[r + c];  //返回给定字符
+}
+```
