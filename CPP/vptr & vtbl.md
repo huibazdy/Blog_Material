@@ -8,49 +8,57 @@
     class A
     {
     public:
-        virtual void vfunc1();
-        virtual void vfunc2();
-        void func1();
-        void func2();
+        virtual void vf1();
+        virtual void vf2();
+        void f1();
+        void f2();
     private:
-        int m_data1;
-        int m_data2;
+        int v1;
+        int v2;
     };
 
-* **A 的派生类 B**
+* **B 继承 A**
 
     ```c++
-    class B:public A
+    class B : public A
     {
     public:
-        virtual void vfunc1();  //默认继承 A::vfunc2()，重写 B::vfunc1()
-        void func2();           //默认继承 A::func1()，重写 B::func2()
+                             // 默认继承虚函数 A::vf2()
+        virtual void vf1();  // A::vf1() 重写为 B::vf1()
+                             // 默认继承成员函数 A::f1()
+        void f2();           // A::f2() 重写为 B::f2()
     private:
-        int m_data3;            //默认继承 m_data1 与 m_data2
+                            // 默认继承 A::v1
+                            // 默认继承 A::v2
+        int v1;             // B 新增数据成员 B::v3
     };
     ```
 
-* **B 的派生类 C**
+    * B 依旧有 4 个成员函数
+    * B 有 3 个数据成员
+
+* **C 继承 B**
 
     ```c++
-    class C:public B
+    class C : public B
     {
     public:
-        virtual void vfunc1(); //默认继承 B::vfunc2()，重写 C::vfunc1()
-        void func2();          //默认继承 B::func1()，重写 C::func2()
+                            // 默认继承 B::vf2() 也就是 A::vf2()
+        virtual void vf1(); // B::vf1() 重写为 C::vf1()
+                            // 默认继承 B::f1() 也就是 A::f1()
+        void f2();          // 默认继承 B::f1()，重写 C::f2()
     private:
-        int m_data1;           //默认继承 B 中 m_data2、m_data2
-        int m_data4;
+                            // 默认继承 A::v1（从 B 中间接继承）
+                            // 默认继承 A::v2（从 B 中间接继承）
+                            // 默认继承 B::v1
+        int v1;             // 新增 C::v1
+        int v2;             // 新增 C::v2
     };
     ```
-
+    
     
 
 只要类带有虚函数，那么类对象的存储空间中就会带有一个虚指针（指向虚表），大小为 4 字节（32位机器）。也就是说，类对象大小就是数据成员所占空间加上 4 个字节。
-
-vptr 指向 vtbl。
-
-vtbl 中存放的都是函数指针，指向的是类涉及到的虚函数。
 
 
 
@@ -63,6 +71,16 @@ C* p = new C;  //实例化一个 C 对象，让指针 p 指向它
 
 
 
+> 只要类中有虚函数，其对象中就存在一个指向虚表（vtbl）的指针 vptr
+
+
+
+> vtbl 中存放的都是函数指针，指向的是类涉及到的虚函数
+
+
+
+
+
 
 
 > 关于继承与派生需要知道的基础知识
@@ -71,5 +89,4 @@ C* p = new C;  //实例化一个 C 对象，让指针 p 指向它
 2. 基类将成员函数分为两类，一类是希望派生类进行重写（或覆盖）的函数，称为***虚函数***；另一类是希望派生类直接继承而不要进行改变的函数。
 3. 基类的析构函数一般都声明为虚函数。
 4. 根据引用或指针所绑定对象类型的不同，决定执行基类的函数版本还是执行某个派生类函数版本的机制称为***动态绑定***。可以理解为声明为 virtual 的函数，才有可能发生动态绑定（因为同名、重写）。
-5. 
 
