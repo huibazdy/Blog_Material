@@ -206,3 +206,4 @@ int main()
 
 1. https://bbs.huaweicloud.com/blogs/375866
 2. https://cloud.tencent.com/developer/article/2214702
+3. https://xiaotaoguo.com/p/cpp-move-semantics/
