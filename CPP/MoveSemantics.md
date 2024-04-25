@@ -200,6 +200,11 @@ int main()
 
 
 
+> 一些原则
+
+* 类中存在指针数据成员，必须自定义拷贝构造函数与拷贝赋值运算符，实现深拷贝
+* 类中存在指针数据成员，必须自定义移动构造函数与移动赋值运算符
+
 
 
 ## 参考资料
@@ -207,3 +212,4 @@ int main()
 1. https://bbs.huaweicloud.com/blogs/375866
 2. https://cloud.tencent.com/developer/article/2214702
 3. https://xiaotaoguo.com/p/cpp-move-semantics/
+4. https://www.jb51.net/article/273425.htm
