@@ -16,7 +16,7 @@
 
 在 32 位机器上，对一个进程来说，理论可寻址虚拟地址为 4 GB。其中 1 GB 是操作系统内核使用（图中灰色部分）。
 
-![](https://raw.githubusercontent.com/huibazdy/TyporaPicture/main/001.png)
+![](https://raw.githubusercontent.com/huibazdy/TyporaPicture/main/mem.png)
 
 
 
