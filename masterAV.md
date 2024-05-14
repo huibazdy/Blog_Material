@@ -7,3 +7,4 @@
 * 语音唤醒
 * 进程间通信 binder 剖析
 * 音频驱动开发
+* AudioALSA 架构与客制化的 ALSA，以及 tinyALSA
