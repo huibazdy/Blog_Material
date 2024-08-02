@@ -59,7 +59,7 @@ Test set score:  0.61
 ## 岭回归
 
 * 一种类似标准线性回归的线性模型（作为标准线性回归的替代方法）
-* 对系数（***w***）要求：除了得到较好的预测结果，还有拟合附加约束，希望 ***w*** 尽量小（都接近 0）
+* 对系数（***w***）要求：除了得到较好的预测结果，还有对模型附加显性约束（来避免过拟合），希望 ***w*** 尽量小（都接近 0）
 * 这种显性约束是一种 **L2** 正则化
 * 目的是避免过拟合
 * 在`linear_model.Ridge`中实现
@@ -88,3 +88,33 @@ print("Test set score: {: .2f}".format(ridge.score(X_test, y_test)))
 
 Training set score:  0.89
 Test set score:  0.75
+
+
+
+Ridge 模型在简单性（系数都接近0）和训练集性能之间做权衡，通过 alpha （默认是 0）参数来调整二者关系。关于 alpha 有以下事实：
+
+* alpha 越大，系数约趋于 0，降低训练集性能，可能会提高泛化性能
+
+```python
+# alpha = 10
+ridge01 = Ridge(alpha=10).fit(X_train, y_train)
+print("Training set score: {: .2f}".format(ridge01.score(X_train, y_train)))
+print("Test set score: {: .2f}".format(ridge01.score(X_test, y_test)))
+```
+
+测试结果：
+
+Training set score:  0.79
+Test set score:  0.64
+
+```python
+# alpha = 0.1
+ridge02 = Ridge(alpha=0.1).fit(X_train, y_train)
+print("Training set score: {: .2f}".format(ridge02.score(X_train, y_train)))
+print("Test set score: {: .2f}".format(ridge02.score(X_test, y_test)))
+```
+
+测试结果：
+
+Training set score:  0.93
+Test set score:  0.77
