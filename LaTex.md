@@ -27,6 +27,43 @@
 
 
 
+## 希腊字母
+
+共 24 个希腊字母：
+
+| 序号 | 小写字母   | LaTex      | 大写字母   | LaTex    | 专用形式                      |
+| ---- | ---------- | ---------- | ---------- | -------- | ----------------------------- |
+| 1    | $\alpha$   | `\alpha`   | $\Alpha$   | `\Alpha` |                               |
+| 2    | $\beta$    | `\beta`    | $\Beta$    |          |                               |
+| 3    | $\gamma$   | `\gamma`   | $\Gamma$   |          |                               |
+| 4    | $\delta$   | `\delta`   | $\Delta$   |          |                               |
+| 5    | $\epsilon$ | `\epsilon` | $\Epsilon$ |          | $\varepsilon$ ：`\varepsilon` |
+| 6    | $\zeta$    | `\zeta`    | $\Zeta$    |          |                               |
+| 7    | $\eta$     | `\eta`     | $\Eta$     |          |                               |
+| 8    | $\theta$   | `\theta`   | $\Theta$   |          | $\vartheta$ ：`\vartheta`     |
+| 9    | $\iota$    | `\iota`    | $\Iota$    |          |                               |
+| 10   | $\kappa$   | `\kappa`   | $\Kappa$   |          |                               |
+| 11   | $\lambda$  | `\lambda`  | $\Lambda$  |          |                               |
+| 12   | $\mu$      | `\mu`      | $\Mu$      |          |                               |
+| 13   | $\nu$      | `\nu`      | $\Nu$      |          |                               |
+| 14   | $\xi$      | `\xi`      | $\Xi$      |          |                               |
+| 15   | $\omicron$ | `\omicron` | $\Omicron$ |          |                               |
+| 16   | $\pi$      | `\pi`      | $\Pi$      |          |                               |
+| 17   | $\rho$     | `\rho`     | $\Rho$     |          | $\varrho$：`\varrho`          |
+| 18   | $\sigma$   | `\sigma`   | $\Sigma$   |          | $\varsigma$：`\varsigma`      |
+| 19   | $\tau$     | `\tau`     | $\Tau$     |          |                               |
+| 20   | $\upsilon$ | `\upsilon` | $\Upsilon$ |          |                               |
+| 21   | $\phi$     | `\phi`     | $\Phi$     |          | $\varphi$：`\varphi`          |
+| 22   | $\chi$     | `\chi`     | $\Chi$     |          |                               |
+| 23   | $\psi$     | `\psi`     | $\Psi$     |          |                               |
+| 24   | $\omega$   | `\omega`   | $\Omega$   |          |                               |
+
+
+
+## 符号上标
+
+
+
 ## 括号
 
 | 类型   | LaTex                 | 效果                        |
@@ -43,3 +80,5 @@
 ## 参考资料
 
 1. [LaTex 知识库：数学公式](https://www.latexstudio.net/LearnLaTeX/basic/10.html)
+1. [LaTex 概率论与数理统计数学公式](https://blog.csdn.net/m0_45381924/article/details/107700325)
+1. [LaTex 常见符号表](https://blog.csdn.net/THU_COCO/article/details/104532778)
