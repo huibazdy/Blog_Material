@@ -151,3 +151,37 @@ $$
 > 2. 其中任意两事件独立
 >
 > 那么事件 $\mathbf{A}$ 、$\mathbf{B}$ 和 $\mathbf{C}$ 就是相互独立的。
+
+### 4.3 多事件独立
+
+todo
+
+
+
+## 五、贝叶斯定理
+
+根据一般乘法法则有：
+$$
+\begin{equation}
+\mathrm{P(\mathbf{A\cap{B}})}\,=\,\mathrm{P(\mathbf{B}|\mathbf{A})}\cdot\mathrm{P(\mathbf{A})}\tag{5.1}
+\end{equation}
+$$
+根据对称性有：
+$$
+\begin{equation}
+\mathrm{P(\mathbf{A\cap{B}})}\,=\,\mathrm{P(\mathbf{A}|\mathbf{B})}\cdot\mathrm{P(\mathbf{B})}\tag{5.2}
+\end{equation}
+$$
+根据等式 **5.1** 和 **5.2** 很容易得出以下结论：
+$$
+\begin{equation}
+\mathrm{P(\mathbf{A}|\mathbf{B})}\cdot\mathrm{P(\mathbf{B})}\,=\,\mathrm{P(\mathbf{B}|\mathbf{A})}\cdot\mathrm{P(\mathbf{A})}\tag{5.3}
+\end{equation}
+$$
+因此，只要满足 $\mathrm{P(\mathbf{B})}\neq0$ 的条件下，有以下结论：
+$$
+\begin{equation}
+\mathrm{P(\mathbf{A}|\mathbf{B})}\,=\,\mathrm{P(\mathbf{B}|\mathbf{A})}\cdot\frac{\mathrm{P(\mathbf{A})}}{\mathrm{P(\mathbf{B})}}\tag{5.4}
+\end{equation}
+$$
+等式 5.4 就是大名鼎鼎的**贝叶斯定理**。
