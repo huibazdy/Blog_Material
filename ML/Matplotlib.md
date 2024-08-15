@@ -122,11 +122,9 @@ plt.show()
 
 ## 2.3 Axes 元素
 
-### 2.3.1 轴
+### 2.3.1 边框
 
 #### Matplotlib 中的轴
-
----
 
 1. top
 2. bottom
@@ -135,14 +133,10 @@ plt.show()
 
 #### **获取轴**
 
----
-
 * `ax = plt.gca()`
 * `ax = plt.axes()`
 
 #### **设置边框**
-
----
 
 以设置 bottom 为例：
 
@@ -152,6 +146,8 @@ plt.show()
 * 显示：`ax.spines['bottom'].set_visible(False)`
 
 #### 坐标轴
+
+
 
 # 参考资料
 
