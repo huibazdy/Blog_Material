@@ -152,3 +152,4 @@ plt.show()
 # 参考资料
 
 1. [利用Python进行数据分析](https://wesmckinney.com/book/)
+1. [Matplotlib基础](https://mlhowto.readthedocs.io/en/latest/matplot.html)
