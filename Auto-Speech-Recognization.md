@@ -53,3 +53,13 @@ $\boldsymbol\theta$ 是由训练数据得到的参数向量。
 * 决策网络只使用了声纹嵌入码的一部分维度
 
 这种变种相似度度量方法保留了两种方式的优势。
+
+
+
+## 决策（Thresholding）
+
+设定阈值 T ，当相似性度量不小于 T 认为声纹时匹配的。可以分为三种应用情况：
+
+* low threshold：直接冻结
+* medium threshold：拒绝后，允许充重试
+* high threshold：直接接受
