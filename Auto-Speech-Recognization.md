@@ -63,3 +63,47 @@ $\boldsymbol\theta$ 是由训练数据得到的参数向量。
 * low threshold：直接冻结
 * medium threshold：拒绝后，允许充重试
 * high threshold：直接接受
+
+
+
+## 评价
+
+> 如何评价一个声纹识别系统的好坏？
+
+例如有两个声纹识别系统 A 和 B，需要保证一些评价变量的一致性：
+
+1. 测试集
+2. 指标
+3. 测试流程
+
+总的来说有两种评价方式：
+
+1. 基于语音对——Pair-Based
+2. 基于集合——Set-Based
+
+
+
+### 构建测试集
+
+构建测试集需要保证以下几点要求：
+
+1. 出现在训练集中的数据都不能再出现在测试集中；
+2. 出现在训练集中的说话人都不能再出现在测试集中
+
+
+
+### Pair-Based
+
+由多组 trial pair 组成的一个 list 。每一个 trial pair 包含：
+
+1. 两段音频（two utterances）：可能来自于同一说话人，也可能来自不同说话人。用一个标志位（0表示来自不同说话人，1表示来自相同说话人）来标记。
+
+参考 **VoxCeleb** 数据集中 standard trial pairs 。
+
+相当于一段音频是提前录入的 enrollment ，另一段是运行时录入的实时音频。
+
+### Set-Based
+
+实际情况中，可能有多个 enrollment （录入语音）。所以有时候需要基于集合的评价指标。实际做法是：
+
+1. 将数据集划分为两个子集（录入数据集enrollment set 和验证数据集 verification set）
