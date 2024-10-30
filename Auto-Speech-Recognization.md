@@ -175,3 +175,50 @@ GMM 基本***思想***：用很多简单函数（多变量高斯分布）通过�
 3. 循环
 4. 注意力机制
 
+
+
+> 损失函数
+
+衡量预测值与实际值差异的一个函数，对于不同问题我们有多种定义损失函数的方法：
+
+![image-20241030170521771](C:\Users\zdy\AppData\Roaming\Typora\typora-user-images\image-20241030170521771.png)
+
+要让损失函数尽量小，就是以参数向量 $\Theta$ 为变量的优化问题，且是一个标准的无约束优化问题。如果**可微**，可以使用**梯度下降法**（**Gradient Descent**）。
+
+在计算梯度下降法的的时候会用到一种计算方法叫反向**传播算法**（**back-propagation**）。
+
+
+
+## 其他工作亮点
+
+>  ADSP新算法落地以及性能问题处理
+
+### ADSP crash 问题
+
+1. 踩内存：stack overflow
+
+   打印内存栈的起始基址地址（pxStack）以及当前指针位置（pxTopOfStack），当前指针向下移动来申请内存，当top>px时，说明内存还未分配完。踩内存时（pxStack会被写坏）不会触发Crash，只有被踩地址被后续访问才会触发。需要打debug patch 才能精准检查地址是否被写坏，打印 Exception。
+
+   最终实验和讨论得出结论：给算法的Stack太小导致，集成新算法时需要重新考虑stack大小，最终增加了10KB。
+
+2. 空间分配失败：malloc failed
+
+   集成新算法需要考虑heap size，否则会出现 malloc failed。需要用到的内存在初始化时就要申请好，最好不要在算法的process过程中进行申请内存操作；及时查看算法需要的DRAM。
+
+3. ADSP 性能问题
+
+   抓取 cpu 占用率：
+
+   ```shell
+   #铃声响起时
+   adb shell "echo runtime_status_start > sys/kernel/debug/audiodsp0"
+   #复现卡顿后
+   adb shell "echo runtime_status_start > sys/kernel/debug/audiodsp0,cat sys/kernel/debug/audiodsp0" > d:\cpu.txt
+   ```
+
+   通过抓取ADSP中各个人物的CPU占用率，可以看出 IDLE 卡顿时剩余很少，一般低于 5% 就会卡顿，PA 所在task占用达到 45%，a2dp 占用 35%，因此蓝牙以及pa场景容易卡顿。做了以下优化：
+
+   * 艾为增加响铃场景，去除大部分效果类模块
+   * 针对特定场景 AURISYS_SCENARIO 不挂载音效算法
+   * offload 通路以前会挂载两个算法，因此将其从playback移动到music，因此只需要在music挂在算法即可
+
